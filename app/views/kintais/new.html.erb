@@ -10,3 +10,15 @@
     </div>
     <%= f.submit "出勤" %>
 <% end %>
+<% if @kintai.errors.present? %>
+    <div style="color:#FF0000;">
+        <ul>
+            <% @kintai.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+<% if flash[:msg].present? %>
+    <p><%= flash[:msg] %></p>
+<% end %>
