@@ -2,7 +2,7 @@
 <%= form_for @kintai do |f| %>
     <div>
         <%= f.label :kintai_date, "年月" %>
-        <%= f.date_select :kintai_date, start_year: 1900, end_year: Time.now.year, use_month_numbers: true %>
+        <%= f.date_select :kintai_date, start_year: 2000, end_year: Time.now.year, use_month_numbers: true %>
     </div>
     <div style="width=40px">
         <%= f.label :kintai_from, "時間"%>
@@ -10,15 +10,4 @@
     </div>
     <%= f.submit "出勤" %>
 <% end %>
-<% if @kintai.errors.present? %>
-    <div style="color:#FF0000;">
-        <ul>
-            <% @kintai.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-            <% end %>
-        </ul>
-    </div>
-<% end %>
-<% if flash[:msg].present? %>
-    <p><%= flash[:msg] %></p>
-<% end %>
+<%= render "shared/errors", obj: @kintai %>

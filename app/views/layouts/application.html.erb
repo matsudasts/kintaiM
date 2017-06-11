@@ -11,4 +11,7 @@
   <body>
     <%= yield %>
   </body>
+  <% if flash[:msg].present? %>
+    <p><%= flash[:msg] %></p>
+  <% end %>a
 </html>

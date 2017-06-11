@@ -1,1 +1,19 @@
-<p>出勤時間を登録しました。</p>
+<div>
+    <p>勤怠一覧</p>
+</div>
+<div>
+<% if @kintai.present? %>
+    <table>
+        <tr>
+            <td>出勤日</td>
+            <td>出勤時間</td>
+        </tr>
+        <% @kintai.each do |f| %>
+        <tr>
+            <td><%= f.kintai_date %></td>
+            <td><%= f.kintai_from %></td>
+        </tr>
+        <% end %>
+    </table>
+<% end %>
+</div>

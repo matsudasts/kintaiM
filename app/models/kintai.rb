@@ -1,5 +1,6 @@
 class Kintai < ApplicationRecord
     validate :check_kintai_time
+    scope :order_by_date, -> { order("kintai_date") }
 
     private
     def check_kintai_time       
@@ -14,7 +15,6 @@ class Kintai < ApplicationRecord
         end
     end
 
-    private
     def correct_time(hhmm)
         if hhmm !~ /^[0-9]+$/
             return false
