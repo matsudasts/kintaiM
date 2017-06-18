@@ -1,0 +1,15 @@
+<h1>勤怠編集</h1>
+<%= form_for @kintai do |f| %>
+    <div>
+        <%= f.label :kintai_date, "年月" %>
+        <%= f.text_field :kintai_year, size: 4, :readonly => true %>
+        <%= f.text_field :kintai_month, size: 2, :readonly => true %>
+        <%= f.text_field :kintai_day, size: 2, :readonly => true %>       
+    </div>
+    <div style="width=40px">
+        <%= f.label :kintai_from, "時間"%>
+        <%= f.text_field :kintai_from, size: 4, maxlength: 4 %>
+    </div>
+    <%= f.submit "編集" %>
+<% end %>
+<%= render "shared/errors", obj: @kintai %>

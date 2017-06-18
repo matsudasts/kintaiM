@@ -1,0 +1,19 @@
+<div>
+    <p>勤怠一覧</p>
+</div>
+<div>
+<% if @kintai.present? %>
+    <table>
+        <tr>
+            <td>出勤日</td>
+            <td>出勤時間</td>
+        </tr>
+        <% @kintai.each do |f| %>
+        <tr>
+            <td><%= link_to f.kintai_date, edit_kintai_path(f) %></td>
+            <td><%= f.kintai_from %></td>
+        </tr>
+        <% end %>
+    </table>
+<% end %>
+</div>

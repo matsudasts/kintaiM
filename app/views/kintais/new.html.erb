@@ -1,13 +1,3 @@
 <h1>勤怠登録</h1>
-<%= form_for @kintai do |f| %>
-    <div>
-        <%= f.label :kintai_date, "年月" %>
-        <%= f.date_select :kintai_date, start_year: 2000, end_year: Time.now.year, use_month_numbers: true %>
-    </div>
-    <div style="width=40px">
-        <%= f.label :kintai_from, "時間"%>
-        <%= f.text_field :kintai_from, size: 4 %>
-    </div>
-    <%= f.submit "出勤" %>
-<% end %>
+<%= render "shared/form", obj: @kintai %>
 <%= render "shared/errors", obj: @kintai %>

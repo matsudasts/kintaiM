@@ -18,39 +18,37 @@ class KintaisController < ApplicationController
         end
     end
 
-    def show
-        params_year = ""
-        params_month = ""
-        params_day = ""
-      
-        # 不正なパラメータの場合は何も表示しない
-        if  params[:kintai_date] !~ /^[0-9]+$/
-            return false
-        end
-        if params[:kintai_date].length > 8
-            return false
-        end
+    def show 
+    end
 
-        # パラメータから勤怠を検索
-        if params[:kintai_date].length >= 4
-            params_year = params[:kintai_date][0..3]
-            @kintai = Kintai.where(kintai_year: params_year).order_by_date
-        end
-        if params[:kintai_date].length >= 6
-            params_month = params[:kintai_date][4..5]
-            @kintai = Kintai.where(kintai_year: params_year, kintai_month: params_month).order_by_date
-        end
-        if params[:kintai_date].length >= 8
-            params_day = params[:kintai_date][6..7]
-            @kintai = Kintai.where(kintai_year: params_year, kintai_month: params_month, kintai_day: params_day)
-        end
+    def edit
+        @kintai = Kintai.find(params[:id])
+    end
 
+    def update
+        @kintai = Kintai.find(params[:id])
+        @kintai.assign_attributes(kintai_params)
+
+        if @kintai.save
+            flash[:msg] = "出勤時間を編集しました。"
+            redirect_to '/kintais/kintai_lists/' + @kintai.kintai_year.to_s + @kintai.kintai_month.to_s
+        else
+            render "edit"
+        end
+    end
+
+    def kintai_lists
+        @kintai = Kintai.search_by_date(params[:kintai_date]).order_by_date
+        render "index"
     end
 
     def kintai_params
         params.require(:kintai).permit(
             :kintai_date,
-            :kintai_from
+            :kintai_from,
+            :kintai_year,
+            :kintai_month,
+            :kintai_day            
         )
     end
 end
