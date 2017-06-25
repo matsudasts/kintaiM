@@ -1,7 +1,7 @@
 <%= form_for obj do |f| %>
     <div>
-        <%= f.label :kintai_date, "年月" %>
-        <%= f.date_select :kintai_date, start_year: 2000, end_year: Time.now.year, use_month_numbers: true %>
+        <%= f.label :kintai_from, "年月" %>
+        <%= f.date_select :kintai_from, start_year: 2000, end_year: Time.now.year, use_month_numbers: true %>
     </div>
     <div style="width=40px">
         <%= f.label :kintai_from, "時間"%>

@@ -1,6 +1,6 @@
 class Kintai < ApplicationRecord
     validate :check_kintai_input, on: :create
-    validate :check_kintai_input_edit, on: :edit
+    validate :check_kintai_input_edit, on: :update
 
     scope :order_by_date, -> { order("kintai_date") }
 

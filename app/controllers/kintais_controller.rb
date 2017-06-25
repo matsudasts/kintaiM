@@ -6,9 +6,11 @@ class KintaisController < ApplicationController
 
     def create
         @kintai = Kintai.new(kintai_params)
-        @kintai.kintai_year = params[:kintai]["kintai_date(1i)"]
-        @kintai.kintai_month = format("%02d", params[:kintai]["kintai_date(2i)"])
-        @kintai.kintai_day = format("%02d", params[:kintai]["kintai_date(3i)"])
+        @kintai.kintai_year = params[:kintai]["kintai_from(1i)"]
+        @kintai.kintai_month = format("%02d", params[:kintai]["kintai_from(2i)"])
+        @kintai.kintai_day = format("%02d", params[:kintai]["kintai_from(3i)"])
+        @kintai.kintai_from = (@kintai.kintai_year + @kintai.kintai_month + @kintai.kintai_day
+            + params[:kintai]["kintai_from"][0..1] + params[:kintai]["kintai_from"][2..3]).to_datetime
 
         if @kintai.save
             flash[:msg] = "出勤時間を登録しました。"
@@ -44,7 +46,6 @@ class KintaisController < ApplicationController
 
     def kintai_params
         params.require(:kintai).permit(
-            :kintai_date,
             :kintai_from,
             :kintai_year,
             :kintai_month,
