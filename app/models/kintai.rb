@@ -22,7 +22,7 @@ class Kintai < ApplicationRecord
     # 新規登録時の入力チェック
     def check_kintai_input     
         correct_time(time_from)
-        exists_kintai(kintai_from.strftime('%Y%m%d'))
+        exists_kintai((kintai_from - 32400).strftime('%Y%m%d'))
     end
 
     # 編集時の入力チェック
