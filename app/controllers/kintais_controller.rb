@@ -5,12 +5,13 @@ class KintaisController < ApplicationController
     end
 
     def create
+        hhmm = params[:kintai]["time_from"][0..1] + params[:kintai]["time_from"][2..3]
         @kintai = Kintai.new(kintai_params)
         @kintai.kintai_year = params[:kintai]["kintai_from(1i)"]
         @kintai.kintai_month = format("%02d", params[:kintai]["kintai_from(2i)"])
         @kintai.kintai_day = format("%02d", params[:kintai]["kintai_from(3i)"])
-        @kintai.kintai_from = (@kintai.kintai_year + @kintai.kintai_month + @kintai.kintai_day
-            + params[:kintai]["kintai_from"][0..1] + params[:kintai]["kintai_from"][2..3]).to_datetime
+        @kintai.kintai_from = (@kintai.kintai_year + @kintai.kintai_month + @kintai.kintai_day + hhmm).to_datetime
+        @kintai.time_from = hhmm
 
         if @kintai.save
             flash[:msg] = "出勤時間を登録しました。"

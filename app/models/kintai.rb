@@ -2,6 +2,8 @@ class Kintai < ApplicationRecord
     validate :check_kintai_input, on: :create
     validate :check_kintai_input_edit, on: :update
 
+    attr_accessor :time_from
+
     scope :order_by_date, -> { order("kintai_date") }
 
     scope :search_by_date, ->(param){
@@ -18,21 +20,21 @@ class Kintai < ApplicationRecord
 
     private
     # 新規登録時の入力チェック
-    def check_kintai_input       
-        correct_time(kintai_from)
-        exists_kintai()
+    def check_kintai_input     
+        correct_time(time_from)
+        exists_kintai(kintai_from.strftime('%Y%m%d'))
     end
 
     # 編集時の入力チェック
     def check_kintai_input_edit
-        correct_time(kintai_from)
+        correct_time(time_from)
     end
 
     # 時間の入力をチェックする
     def correct_time(hhmm)
-        if !kintai_from.present?
+        if !hhmm.present?
             errors.add("時間は必須入力です。","")
-        elsif kintai_from.length != 4
+        elsif hhmm.length != 4
             errors.add("時間は4桁で入力して下さい。","")
         elsif hhmm !~ /^[0-9]+$/
             errors.add("不正な時間です。","")
@@ -41,8 +43,9 @@ class Kintai < ApplicationRecord
         end
     end
 
-    def exists_kintai
-        if Kintai.exists?(kintai_date: kintai_date)
+    def exists_kintai(yyyymmdd)
+        byebug
+        if Kintai.where("strftime('%Y%m%d', kintai_from) = ?", yyyymmdd).exists?
             errors.add("指定された年月の出勤は既に登録されています。","")
         end
     end
