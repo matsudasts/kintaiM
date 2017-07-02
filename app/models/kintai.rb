@@ -4,17 +4,11 @@ class Kintai < ApplicationRecord
 
     attr_accessor :time_from
 
-    scope :order_by_date, -> { order("kintai_date") }
+    scope :order_by_date, -> { order("kintai_from") }
 
     scope :search_by_date, ->(param){
-        if param.present? && param =~ /^[0-9]+$/ && param.length < 9
-            if param.length == 4
-                where(kintai_year: param[0..3])
-            elsif param.length == 6
-                where(kintai_year: param[0..3], kintai_month: param[4..5])
-            elsif param.length == 8
-                where(kintai_year: param[0..3], kintai_month: param[4..5], kintai_day: param[6..7])
-            end
+        if param.present? && param =~ /^[0-9]+$/
+            where(kintai_year: param[0..3], kintai_month: param[4..5])
         end
     }
 
@@ -33,9 +27,7 @@ class Kintai < ApplicationRecord
     # 時間の入力をチェックする
     def correct_time(hhmm)
         if !hhmm.present?
-            errors.add("時間は必須入力です。","")
-        elsif hhmm.length != 4
-            errors.add("時間は4桁で入力して下さい。","")
+            errors.add("時間を4桁で入力して下さい。","")
         elsif hhmm !~ /^[0-9]+$/
             errors.add("不正な時間です。","")
         elsif !(hhmm[0..1].to_i).between?(0, 23) || !(hhmm[2..3].to_i).between?(0, 59)
@@ -44,7 +36,6 @@ class Kintai < ApplicationRecord
     end
 
     def exists_kintai(yyyymmdd)
-        byebug
         if Kintai.where("strftime('%Y%m%d', kintai_from) = ?", yyyymmdd).exists?
             errors.add("指定された年月の出勤は既に登録されています。","")
         end

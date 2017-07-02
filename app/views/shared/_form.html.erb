@@ -8,4 +8,7 @@
         <%= f.text_field :time_from, size: 4, maxlength: 4 %>
     </div>
     <%= f.submit "出勤" %>
+    <div>
+        <%= link_to "一覧", "kintais/kintai_lists/" + Time.now.year.to_s + format("%02d", Time.now.month.to_s) %>
+    </div>
 <% end %>

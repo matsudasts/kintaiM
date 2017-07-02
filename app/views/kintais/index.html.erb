@@ -10,8 +10,8 @@
         </tr>
         <% @kintai.each do |f| %>
         <tr>
-            <td><%= link_to f.kintai_date, edit_kintai_path(f) %></td>
-            <td><%= f.kintai_from %></td>
+            <td><%= link_to (f.kintai_from - 32400).strftime('%Y%m%d'), edit_kintai_path(f) %></td>
+            <td><%= (f.kintai_from - 32400).strftime('%H%M') %></td>
         </tr>
         <% end %>
     </table>
