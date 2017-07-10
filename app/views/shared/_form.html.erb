@@ -1,14 +1,10 @@
 <%= form_for obj do |f| %>
     <div>
         <%= f.label :kintai_from, "年月" %>
-        <%= f.date_select :kintai_from, start_year: 2000, end_year: Time.now.year, use_month_numbers: true %>
-    </div>
-    <div style="width=40px">
-        <%= f.label :time_from, "時間"%>
-        <%= f.text_field :time_from, size: 4, maxlength: 4 %>
+        <%= f.datetime_select :kintai_from, start_year: 2000, end_year: Time.now.year, use_month_numbers: true %>
     </div>
     <%= f.submit "出勤" %>
     <div>
-        <%= link_to "一覧", "kintais/kintai_lists/" + Time.now.year.to_s + format("%02d", Time.now.month.to_s) %>
+        <%= link_to "一覧", "/kintais/kintai_lists/" + Time.now.year.to_s + format("%02d", Time.now.month.to_s) %>
     </div>
 <% end %>

@@ -10,10 +10,13 @@
         </tr>
         <% @kintai.each do |f| %>
         <tr>
-            <td><%= link_to (f.kintai_from - 32400).strftime('%Y%m%d'), edit_kintai_path(f) %></td>
-            <td><%= (f.kintai_from - 32400).strftime('%H%M') %></td>
+            <td><%= link_to (f.kintai_from).strftime('%Y%m%d'), edit_kintai_path(f) %></td>
+            <td><%= (f.kintai_from).strftime('%H%M') %></td>
         </tr>
         <% end %>
     </table>
 <% end %>
+<div style="margin:20px;">
+    <%= link_to "戻る", root_path %>
+</div>
 </div>

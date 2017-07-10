@@ -8,8 +8,11 @@
     </div>
     <div style="width=40px">
         <%= f.label :kintai_from, "時間"%>
-        <%= f.text_field :kintai_from, size: 4, maxlength: 4 %>
+        <input type="text" value=<%= (@kintai.kintai_from).strftime('%H%M') %> maxlength="4" size="4">
     </div>
     <%= f.submit "編集" %>
 <% end %>
+<div>
+    <%= link_to "戻る", '/kintais/kintai_lists/' + @kintai.kintai_year.to_s + @kintai.kintai_month.to_s %>
+</div>
 <%= render "shared/errors", obj: @kintai %>

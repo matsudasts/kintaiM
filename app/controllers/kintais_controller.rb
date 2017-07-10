@@ -5,27 +5,13 @@ class KintaisController < ApplicationController
     end
 
     def create
-        hhmm = params[:kintai]["time_from"]
-        #if  params[:kintai]["time_from"].present? && params[:kintai]["time_from"].length == 4
-        #    if params[:kintai]["time_from"][0..1].to_i.between?(0, 23) && params[:kintai]["time_from"][2..3].to_i.between?(0, 59)
-        # #       hhmm = params[:kintai]["time_from"][0..1] + params[:kintai]["time_from"][2..3]
-        #    end
-        #end
-        #if !hhmm.present?
-        #    errors.add("時間を4桁で入力して下さい。","")
-        #elsif hhmm !~ /^[0-9]+$/
-        #    errors.add("不正な時間です。","")
-        #elsif !(hhmm[0..1].to_i).between?(0, 23) || !(hhmm[2..3].to_i).between?(0, 59)
-        #    errors.add("不正な時間です。","")
-        #else
-            @kintai = Kintai.new(kintai_params)
-            @kintai.kintai_year = params[:kintai]["kintai_from(1i)"]
-            @kintai.kintai_month = format("%02d", params[:kintai]["kintai_from(2i)"])
-            @kintai.kintai_day = format("%02d", params[:kintai]["kintai_from(3i)"])
-            @kintai.kintai_from = (@kintai.kintai_year + @kintai.kintai_month + @kintai.kintai_day + hhmm).to_datetime
-            @kintai.time_from = hhmm
-       # end
-    
+        @kintai = Kintai.new(kintai_params)
+        @kintai.kintai_year = params[:kintai]["kintai_from(1i)"]
+        @kintai.kintai_month = format("%02d", params[:kintai]["kintai_from(2i)"])
+        @kintai.kintai_day = format("%02d", params[:kintai]["kintai_from(3i)"])
+        # 時間がずれるので、9時間引いて登録
+        @kintai.kintai_from = (@kintai.kintai_year + @kintai.kintai_month + @kintai.kintai_day + params[:kintai]["kintai_from(4i)"] + params[:kintai]["kintai_from(5i)"]).to_datetime - 0.375
+
         if @kintai.save
             flash[:msg] = "出勤時間を登録しました。"
             redirect_to new_kintai_path
@@ -34,7 +20,7 @@ class KintaisController < ApplicationController
         end
     end
 
-    def show 
+    def show
     end
 
     def edit

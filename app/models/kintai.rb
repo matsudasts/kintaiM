@@ -2,7 +2,7 @@ class Kintai < ApplicationRecord
     validate :check_kintai_input, on: :create
     validate :check_kintai_input_edit, on: :update
 
-    attr_accessor :time_from
+    #attr_accessor :time_from
 
     scope :order_by_date, -> { order("kintai_from") }
 
@@ -15,13 +15,12 @@ class Kintai < ApplicationRecord
     private
     # 新規登録時の入力チェック
     def check_kintai_input     
-        correct_time(time_from)
-        exists_kintai((kintai_from - 32400).strftime('%Y%m%d'))
+        exists_kintai(kintai_from.strftime('%Y%m%d'))
     end
 
     # 編集時の入力チェック
     def check_kintai_input_edit
-        correct_time(time_from)
+        correct_time(kintai_from.strftime('%H%M'))
     end
 
     # 時間の入力をチェックする
