@@ -2,20 +2,16 @@ class Kintai < ApplicationRecord
     validate :check_kintai_input, on: :create
     validate :check_kintai_input_edit, on: :update
 
-    #attr_accessor :time_from
-
     scope :order_by_date, -> { order("kintai_from") }
 
     scope :search_by_date, ->(param){
-        if param.present? && param =~ /^[0-9]+$/
-            where(kintai_year: param[0..3], kintai_month: param[4..5])
-        end
+        where(kintai_year: param[0..3], kintai_month: param[4..5])
     }
 
     private
     # 新規登録時の入力チェック
-    def check_kintai_input     
-        exists_kintai(kintai_from.strftime('%Y%m%d'))
+    def check_kintai_input
+        exists_kintai((kintai_from-32400).strftime('%Y%m%d').to_s)
     end
 
     # 編集時の入力チェック

@@ -1,0 +1,12 @@
+<%= form_for obj do |f| %>
+    <div style="margin-top:20px;margin-bottom:20px;">
+        <%= f.label :kintai_from, "年月", :class=>"label label-info label_nengetsu" %>
+        <%= f.datetime_select :kintai_from, start_year: 2000, end_year: Time.now.year, use_month_numbers: true %>
+    </div>
+    <%= f.text_field :kintai_from, :class=>"datepicker" %>
+    <%= f.submit "出勤", :class=>"btn btn-primary" %>
+    <%= f.submit "退勤", :class=>"btn btn-primary" %>
+    <div>
+        <%= link_to "勤怠一覧", "/kintais/kintai_lists/" + Time.now.year.to_s + format("%02d", Time.now.month.to_s) %>
+    </div>
+<% end %>

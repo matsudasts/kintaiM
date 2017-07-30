@@ -10,7 +10,7 @@ class KintaisController < ApplicationController
         @kintai.kintai_month = format("%02d", params[:kintai]["kintai_from(2i)"])
         @kintai.kintai_day = format("%02d", params[:kintai]["kintai_from(3i)"])
         # 時間がずれるので、9時間引いて登録
-        @kintai.kintai_from = (@kintai.kintai_year + @kintai.kintai_month + @kintai.kintai_day + params[:kintai]["kintai_from(4i)"] + params[:kintai]["kintai_from(5i)"]).to_datetime - 0.375
+        @kintai.kintai_from = get_kintai_date
 
         if @kintai.save
             flash[:msg] = "出勤時間を登録しました。"
@@ -18,9 +18,6 @@ class KintaisController < ApplicationController
         else
             return render :new
         end
-    end
-
-    def show
     end
 
     def edit
@@ -51,5 +48,10 @@ class KintaisController < ApplicationController
             :kintai_month,
             :kintai_day            
         )
+    end
+
+    private
+    def get_kintai_date
+        (params[:kintai]["kintai_from(1i)"] + params[:kintai]["kintai_from(2i)"] + params[:kintai]["kintai_from(3i)"] + params[:kintai]["kintai_from(4i)"] + params[:kintai]["kintai_from(5i)"]).to_datetime - 0.375
     end
 end
