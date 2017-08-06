@@ -6,9 +6,9 @@ class KintaisController < ApplicationController
 
     def create
         @kintai = Kintai.new(kintai_params)
-        @kintai.kintai_year = params[:kintai]["kintai_from(1i)"]
-        @kintai.kintai_month = format("%02d", params[:kintai]["kintai_from(2i)"])
-        @kintai.kintai_day = format("%02d", params[:kintai]["kintai_from(3i)"])
+        @kintai.kintai_year = params[:kintai]["kintai_from"][0..3]
+        @kintai.kintai_month = params[:kintai]["kintai_from"][5..6]
+        @kintai.kintai_day = params[:kintai]["kintai_from"][8..9]
         # 時間がずれるので、9時間引いて登録
         @kintai.kintai_from = get_kintai_date
 
@@ -52,6 +52,6 @@ class KintaisController < ApplicationController
 
     private
     def get_kintai_date
-        (params[:kintai]["kintai_from(1i)"] + params[:kintai]["kintai_from(2i)"] + params[:kintai]["kintai_from(3i)"] + params[:kintai]["kintai_from(4i)"] + params[:kintai]["kintai_from(5i)"]).to_datetime - 0.375
+        (params[:kintai]["kintai_from"][0..3] + params[:kintai]["kintai_from"][5..6] + params[:kintai]["kintai_from"][8..9] + params[:kintai]["kintai_from(4i)"] + params[:kintai]["kintai_from(5i)"]).to_datetime - 0.375
     end
 end

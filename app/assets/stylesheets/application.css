@@ -14,3 +14,8 @@
  *= require_self
  *= require bootstrap-datetimepicker
  */
+
+body
+{
+    background-image: url(“Main_Theme.jpg”); 
+}
