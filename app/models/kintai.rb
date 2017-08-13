@@ -32,7 +32,7 @@ class Kintai < ApplicationRecord
 
     def exists_kintai(yyyymmdd)
         if Kintai.where("strftime('%Y%m%d', kintai_from) = ?", yyyymmdd).exists?
-            errors.add("指定された年月の出勤は既に登録されています。","")
+            errors.add("指定された日の出勤は既に登録されています。","")
         end
     end
 
