@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170527031923) do
     t.string   "kintai_year"
     t.string   "kintai_month"
     t.string   "kintai_day"
+    t.date     "kintai_date"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

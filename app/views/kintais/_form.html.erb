@@ -1,12 +1,11 @@
 <%= form_for obj do |f| %>
     <div style="margin-top:20px;margin-bottom:20px;">
-        <%= f.label :kintai_from, "日付", :class=>"label label-info label_nengetsu" %>
-        <%= f.text_field format_yyyymmdd(@obj.kintai_from), :id=>"datepicker", :readonly=>"true", :class=>"date_select" %>
+        <%= f.text_field :kintai_date_from_disp, :id=>"datepicker", :readonly=>"true", :class=>"date_select" %>
         <%= f.time_select :kintai_from %>
+        <%= f.submit "出勤", :class=>"btn btn-primary" %>
     </div>
-    <%= f.submit "出勤", :class=>"btn btn-primary" %>
     <%= f.submit "退勤", :class=>"btn btn-primary" %>
-    <div>
-        <%= link_to "勤怠一覧", "/kintais/kintai_lists/" + Time.now.year.to_s + format("%02d", Time.now.month.to_s) %>
+    <div style="margin-top:20px;font-size:18px;">
+        <%= link_to "一覧", "/kintais/kintai_lists/" + Time.now.year.to_s + format("%02d", Time.now.month.to_s) %>
     </div>
 <% end %>

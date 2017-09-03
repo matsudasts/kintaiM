@@ -6,6 +6,7 @@ class CreateKintais < ActiveRecord::Migration[5.0]
       t.string :kintai_year
       t.string :kintai_month
       t.string :kintai_day
+      t.date :kintai_date
       t.timestamps null: false
     end
   end
