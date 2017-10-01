@@ -1,11 +1,22 @@
 <%= form_for obj do |f| %>
-    <div style="margin-top:20px;margin-bottom:20px;">
-        <%= f.text_field :kintai_date_from_disp, :id=>"datepicker", :readonly=>"true", :class=>"date_select" %>
-        <%= f.time_select :kintai_from %>
-        <%= f.submit "出勤", :class=>"btn btn-primary" %>
+    <div>
+        <%= f.text_field :kintai_date, :id=>"datepicker1", :readonly=>"true", :class=>"date_select" %>
+        <span>の勤怠</span>
     </div>
-    <%= f.submit "退勤", :class=>"btn btn-primary" %>
+    <div style="margin-top:20px;margin-bottom:20px;font-size:20px;">
+        <%= f.text_field :kintai_from, :id=>"datepicker2", :readonly=>"true", :style=>"width:110px;", :class=>"date_select" %>
+        <%= f.time_select :kintai_from %>
+        <span style="vertical-align:middle" class="label label-default">出勤時間</span>
+    </div>
+    <div style="margin-top:20px;margin-bottom:20px;;font-size:20px;">
+        <%= f.text_field :kintai_to, :id=>"datepicker3", :readonly=>"true", :style=>"width:110px;", :class=>"date_select" %>
+        <%= f.time_select :kintai_to %>
+        <span style="vertical-align:middle" class="label label-default">退勤時間</span>
+    <div>
     <div style="margin-top:20px;font-size:18px;">
-        <%= link_to "一覧", "/kintais/kintai_lists/" + Time.now.year.to_s + format("%02d", Time.now.month.to_s) %>
+        <%= f.submit "登録", :style=>"font-size:30px;", :class=>"btn btn-primary" %>
+    </div>
+    <div style="margin-top:20px;font-size:18px;">
+        <%= link_to "一覧へ", "/kintais/kintai_lists/" + Time.now.year.to_s + format("%02d", Time.now.month.to_s) %>
     </div>
 <% end %>

@@ -12,7 +12,8 @@ class Kintai < ApplicationRecord
         where(kintai_date: (param[0..3] + param[5..6] + param[8..9]).to_date)
     }
 
-    attr_accessor :kintai_date_from_disp
+    #attr_accessor :kintai_date_from_disp
+    #attr_accessor :kintai_date_to_disp
 
     def exists_kintai(yyyymmdd)
         if Kintai.where("strftime('%Y%m%d', kintai_from) = ?", yyyymmdd).exists?

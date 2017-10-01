@@ -18,7 +18,30 @@
 //= require_tree .
 
 $(function(){
-    $("#datepicker").datepicker({
-        dateFormat: 'yy/mm/dd'
+    $("#datepicker1").datepicker({
+        dateFormat: 'yy-mm-dd',
+        //勤怠日選択時、その日の勤怠が既に登録されていればそれを表示
+        onSelect: function(){
+            $.ajax({
+                async: false,
+                url: "kintais/get_kintai",
+                type: "GET",
+                data: {kintai_date : $("#datepicker1").val()},
+                dataType: "json",
+                success: function(data) {
+                },
+                error: function(data) {
+                    alert(error);
+                }
+            });
+        }
+    });
+
+    $("#datepicker2").datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
+
+    $("#datepicker3").datepicker({
+        dateFormat: 'yy-mm-dd'
     });
 });
