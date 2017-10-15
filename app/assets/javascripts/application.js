@@ -24,11 +24,20 @@ $(function(){
         onSelect: function(){
             $.ajax({
                 async: false,
-                url: "kintais/get_kintai",
+                url: "kintais/exists_kintai?kintai_date=" + $("#datepicker1").val(),
                 type: "GET",
                 data: {kintai_date : $("#datepicker1").val()},
                 dataType: "json",
                 success: function(data) {
+                    if (data == true)
+                    {
+                        alert("success")
+                    }
+                    else
+                    {
+                        alert("fail");
+                        window.location.replace("kintais/new") ;
+                    }
                 },
                 error: function(data) {
                     alert(error);

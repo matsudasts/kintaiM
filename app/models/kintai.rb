@@ -1,6 +1,6 @@
 class Kintai < ApplicationRecord
-    validate :check_kintai_input, on: :create
-    validate :check_kintai_input_edit, on: :update
+    #validate :check_kintai_input, on: :create
+    #validate :check_kintai_input_edit, on: :update
 
     scope :order_by_date, -> { order("kintai_from") }
 
@@ -14,15 +14,6 @@ class Kintai < ApplicationRecord
 
     #attr_accessor :kintai_date_from_disp
     #attr_accessor :kintai_date_to_disp
-
-    def exists_kintai(yyyymmdd)
-        if Kintai.where("strftime('%Y%m%d', kintai_from) = ?", yyyymmdd).exists?
-            #errors.add("指定された日の出勤は既に登録されています。","")
-            true
-        else
-            false
-        end
-    end
 
     private
     # 新規登録時の入力チェック
