@@ -29,13 +29,12 @@ $(function(){
                 data: {kintai_date : $("#datepicker1").val()},
                 dataType: "json",
                 success: function(data) {
-                    if (data == true)
+                    if (data["id"] != "")
                     {
-                        alert("success")
+                        window.location.replace("kintais/" + data["id"] + "/edit") ;
                     }
                     else
                     {
-                        alert("fail");
                         window.location.replace("kintais/new") ;
                     }
                 },

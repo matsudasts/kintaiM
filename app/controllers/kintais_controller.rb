@@ -1,7 +1,6 @@
 class KintaisController < ApplicationController
 
     def new
-        byebug
         kintai = Kintai.where("kintai_date=?", Time.now.to_date)[0]
         if kintai.present?
             redirect_to edit_kintai_path(kintai.id)
@@ -46,28 +45,14 @@ class KintaisController < ApplicationController
         end
     end
 
-    def get_kintai
-        kintai = Kintai.where("kintai_date=?",params[:kintai_date])[0]
-        if kintai.present?
-            redirect_to edit_kintai_path(kintai.id)
-        else
-            redirect_to new_kintai_path
-            #@kintai = Kintai.new
-            #@kintai.kintai_date = "2017-01-01"
-            #@kintai.kintai_from = Time.now.strftime('%Y/%m/%d')
-            #@kintai.kintai_to = Time.now.strftime('%Y/%m/%d')
-            #render :new         
-        end
-    end
-
     def exists_kintai
         kintai = Kintai.where("kintai_date=?",params[:kintai_date])[0]
         if kintai.present?
-            byebug
-            true
+            data = {'id' => kintai.id}
         else
-            false
+            data = {'id' => ''}
         end
+        render :json => data        
     end
 
     def kintai_lists
