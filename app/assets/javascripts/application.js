@@ -52,4 +52,11 @@ $(function(){
     $("#datepicker3").datepicker({
         dateFormat: 'yy-mm-dd'
     });
+
+    $("#lnkKintaiLists").on('click', function () {
+    });
 });
+
+function getKintaiMonth(){
+    return $("#datepicker1").val();
+};

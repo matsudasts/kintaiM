@@ -52,11 +52,11 @@ class KintaisController < ApplicationController
         else
             data = {'id' => ''}
         end
-        render :json => data        
+        render :json => data
     end
 
     def kintai_lists
-        @kintai = Kintai.search_by_month(params[:kintai_date_from_disp]).order_by_date
+        @kintai = Kintai.search_by_month(params[:kintai_date]).order_by_date
         render :index
     end
 

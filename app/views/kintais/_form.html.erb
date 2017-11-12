@@ -17,6 +17,6 @@
         <%= f.submit "登録", :style=>"font-size:30px;", :class=>"btn btn-primary" %>
     </div>
     <div style="margin-top:20px;font-size:18px;">
-        <%= link_to "一覧へ", "/kintais/kintai_lists/" + Time.now.year.to_s + format("%02d", Time.now.month.to_s) %>
+        <%= link_to "一覧へ", "/kintais/kintai_lists/201711", :id=>"lnkKintaiLists"%>
     </div>
 <% end %>
