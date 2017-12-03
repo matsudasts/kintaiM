@@ -54,9 +54,12 @@ $(function(){
     });
 
     $("#lnkKintaiLists").on('click', function () {
+        var dateValue = $("#datepicker1").val()
+        location.replace("/kintais/kintai_lists/" + dateValue.substr(0,4) + dateValue.substr(5,2));
     });
 });
 
 function getKintaiMonth(){
-    return $("#datepicker1").val();
+    var dateValue = $("#datepicker1").val()
+    return "/kintais/kintai_lists/" + dateValue.substr(0,4) + dateValue.substr(5,2);
 };
